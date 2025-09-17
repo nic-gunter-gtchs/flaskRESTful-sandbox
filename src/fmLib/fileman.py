@@ -1,5 +1,6 @@
 import json
 import xml.etree.ElementTree as ET
+
 def newF(name, directory="../", extension="txt"):
   """
   Creates a new file and returns its file path.
@@ -12,11 +13,13 @@ def newF(name, directory="../", extension="txt"):
     f = open(f"{directory}{name}.{extension}", "x") # makes the new file
   except Exception as exception:
     # if some error happens, handle it
-    print(f"File opening failed. Exception: \n{exception}")
+    print(f"File creation failed. Exception: \n{exception}")
   finally:
     path = directory+name+"."+extension
+    f.close()
+    f = None
     return path
-  return
+
 def readF(path, write=False):
   """
   Opens an existing file and returns its contents.
@@ -24,7 +27,23 @@ def readF(path, write=False):
   path: The path to the file. This argument must be passed.
   write: If True, sets the file up for writing. This will still return the contents of the file.
   """
-
+  if write:
+    mode = "w"
+  elif !write:
+    mode = "r"
+  else:
+    print("write is not a boolean value.")
+    return False
+  try:
+    f = open(path, mode)
+    c = f.read()
+  except Exception as exception:
+    print(f"File opening/read failed. Exception: \n{exception}")
+  finally:
+    f.close()
+    f = None
+    return c
+  
 def readS(path, type="json"):
   """
   Reads specially formatted files.
