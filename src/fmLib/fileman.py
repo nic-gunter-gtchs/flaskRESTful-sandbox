@@ -1,4 +1,4 @@
-import json
+import json, base64
 import xml.etree.ElementTree as ET
 
 def newF(name, directory="../", extension="txt"):
@@ -36,7 +36,6 @@ def readF(path, write=False):
     return False
   try:
     f = open(path, mode)
-    c = f.read()
   except Exception as exception:
     print(f"File opening/read failed. Exception: \n{exception}")
   finally:
@@ -46,9 +45,23 @@ def readF(path, write=False):
   
 def readS(path, type="json"):
   """
-  Reads specially formatted files.
+  Reads specially formatted files and returns their data.
   Parameters:
   path: The path to the file. This argument must be passed.
   type: The data type to read from the file. Options: json, xml, base64. Default is json.
   """
-
+  try:
+    f = open(path)
+    c = f.read()
+  except Exception as exception:
+    print(f"File opening/read failed. Exception: \n{exception}")
+  finally:
+    match type:
+      case "json":
+        return json.load(f)
+      case "xml":
+        return ET.parse(path)
+      case "base64":
+        return base64.b64decode(c)
+      
+    
