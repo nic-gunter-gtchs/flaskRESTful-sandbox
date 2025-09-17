@@ -20,4 +20,6 @@ def readS(path, type="json"):
   Reads specially formatted files.
   Parameters:
   path: The path to the file. This argument must be passed.
-  
+  type: The data type to read from the file. Options: json, xml, base64. Default is json.
+  """
+
