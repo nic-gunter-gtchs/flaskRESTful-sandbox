@@ -21,22 +21,15 @@ def newF(name, directory="../", extension="txt"):
     f = None
     return path
 
-def readF(path, write=False):
+def readF(path):
   """
   Opens an existing file and returns its contents.
   Parameters:
   path: The path to the file. This argument must be passed.
-  write: If True, sets the file up for writing. This will still return the contents of the file.
   """
-  if write:
-    mode = "w"
-  elif !write:
-    mode = "r"
-  else:
-    print("write is not a boolean value.")
-    return False
   try:
-    f = open(path, mode)
+    f = open(path)
+    c = f.read()
   except Exception as exception:
     print(f"File opening/read failed. Exception: \n{exception}")
     return False
