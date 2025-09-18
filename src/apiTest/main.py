@@ -14,15 +14,17 @@ class FileMan(Resource):
         dir = request.form["data"]["directory"]
         fname = request.form["data"]["name"]
         ext = request.form["data"]["extension"]
-        pass
-      case "update":
+        fmresp = FM.newF(fname, dir, ext)
+      case "read":
         path = request.form["data"]["directory"]
-        write = request.form["data"]["writable"]
-        pass
+        fmresp = FM.readF(path)
       case "supdate":
         path = request.form["data"]["directory"]
         format = request.form["data"]["special"]
-        pass
+        fmresp = FM.readS(path, format)
+    if fmresp == False:
+      return {"error": "Malformed request"}, 405
+    else:
       return {"data": fmresp}
   
 if __name__ == '__main__':
