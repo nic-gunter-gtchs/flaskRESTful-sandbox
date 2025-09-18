@@ -1,7 +1,6 @@
 from fmLib import fileman as FM
 from flask import Flask, request
 from flask_restx import Api, Resource
-from markupsafe import escape
 
 app = Flask(__name__)
 api = Api(app)
@@ -14,7 +13,17 @@ class FileMan(Resource):
       case "create":
         dir = request.form["data"]["directory"]
         fname = request.form["data"]["name"]
-        
+        ext = request.form["data"]["extension"]
         pass
       case "update":
-        
+        path = request.form["data"]["directory"]
+        write = request.form["data"]["writable"]
+        pass
+      case "supdate":
+        path = request.form["data"]["directory"]
+        format = request.form["data"]["special"]
+        pass
+      return {"data": fmresp}
+  
+if __name__ == '__main__':
+    app.run(debug=True)
