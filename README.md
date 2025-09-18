@@ -1,2 +1,2 @@
-# flaskRESTful-sandbox
-I'm trying to learn Flask RESTful, APIs have always been a sore spot for me
+# flaskRESTX-sandbox
+I'm trying to learn Flask RESTX, APIs have always been a sore spot for me
