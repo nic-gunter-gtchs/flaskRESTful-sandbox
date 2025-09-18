@@ -14,6 +14,7 @@ def newF(name, directory="../", extension="txt"):
   except Exception as exception:
     # if some error happens, handle it
     print(f"File creation failed. Exception: \n{exception}")
+    return False
   finally:
     path = directory+name+"."+extension
     f.close()
@@ -38,6 +39,7 @@ def readF(path, write=False):
     f = open(path, mode)
   except Exception as exception:
     print(f"File opening/read failed. Exception: \n{exception}")
+    return False
   finally:
     f.close()
     f = None
@@ -58,10 +60,19 @@ def readS(path, type="json"):
   finally:
     match type:
       case "json":
-        return json.load(f)
+        j = json.load(f)
+        f.close()
+        f = None
+        return j
       case "xml":
-        return ET.parse(path)
+        e = ET.parse(path)
+        f.close()
+        f = None
+        return e
       case "base64":
-        return base64.b64decode(c)
+        b = base64.base64decode(c)
+        f.close()
+        f = None
+        return b
       
     
