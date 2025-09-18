@@ -50,6 +50,7 @@ def readS(path, type="json"):
     c = f.read()
   except Exception as exception:
     print(f"File opening/read failed. Exception: \n{exception}")
+    return False
   finally:
     match type:
       case "json":
