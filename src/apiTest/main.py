@@ -1,26 +1,27 @@
 from fmLib import fileman as FM
 from flask import Flask, request
 from flask_restx import Api, Resource
-
+import json
 app = Flask(__name__)
 api = Api(app)
 
 @api.route("/tests/fm/api")
 class FileMan(Resource):
   def put(self):
-    type = request.form["data"]["type"]
-    match type:
+    data = request.get_json()
+    mode = data['type']
+    match mode:
       case "create":
-        dir = request.form["data"]["directory"]
-        fname = request.form["data"]["name"]
-        ext = request.form["data"]["extension"]
+        dir = data['directory'].strip()
+        fname = data['name'].strip()
+        ext = data['extension'].strip()
         fmresp = FM.newF(fname, dir, ext)
       case "read":
-        path = request.form["data"]["directory"]
+        path = data['directory'].strip()
         fmresp = FM.readF(path)
       case "supdate":
-        path = request.form["data"]["directory"]
-        format = request.form["data"]["special"]
+        path = data['directory'].strip()
+        format = data['special'].strip()
         fmresp = FM.readS(path, format)
     if fmresp == False:
       return {"error": "Malformed request"}, 405

@@ -25,7 +25,7 @@ def readF(path):
   """
   Opens an existing file and returns its contents.
   Parameters:
-  path: The path to the file. This argument must be passed.
+  path: The path to the file. This argument must be passed. This is from the scope of the library folder.
   """
   try:
     f = open(path)
